@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var timerTextView: TextView
     internal lateinit var counterTextView: TextView
     internal var counter = 0;
-    internal var time = 10;
+    internal var time = 60;
 
     internal var appStarted = false;
     internal lateinit var countdownTimer : CountDownTimer;
-    internal val initialCountDownTimer : Long = 10000;
+    internal val initialCountDownTimer : Long = 60000;
     internal val intervalCountDownTimer : Long = 1000;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +41,6 @@ class MainActivity : AppCompatActivity() {
         timerTextView.text = getString(R.string.timerText, time);
     }
 
-    //Iniciar la partida
-    private fun startGame() {
-        countdownTimer.start()
-        appStarted = true
-    }
-
     private fun initCountdown(){
         countdownTimer = object : CountDownTimer(initialCountDownTimer, intervalCountDownTimer){
             override fun onTick(p0: Long) {
@@ -65,12 +59,23 @@ class MainActivity : AppCompatActivity() {
         counterTextView.text = counter.toString();
     }
 
+
+    //Iniciar la partida
+    private fun startGame() {
+        countdownTimer.start()
+        appStarted = true
+    }
+
     private fun endGame(){
         Toast.makeText(this, getString(R.string.endGame), Toast.LENGTH_LONG).show()
         resetGame()
     }
 
     private fun resetGame() {
-        
+        counter = 0;
+        timerTextView.text = getString(R.string.timerText, time);
+        appStarted = false;
+        counterTextView.text = counter.toString()
+        initCountdown()
     }
 }
