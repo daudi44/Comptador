@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetGame() {
+        Toast.makeText(this, getString(R.string.puntFinal) + ' ' + counter, Toast.LENGTH_LONG).show()
         counter = 0;
         timerTextView.text = getString(R.string.timerText, time);
         appStarted = false;
